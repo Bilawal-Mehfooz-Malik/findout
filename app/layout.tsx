@@ -1,17 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import AppBar from "./components/layout/AppBar";
+import AppBar from "@/app/ui/AppBar";
+import { geistMono, inter } from "@/app/lib/fonts";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "FindOut",
@@ -24,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className={inter.variable}>
+      <body className={`${geistMono.variable} antialiased`}>
         <AppBar />
         {children}
       </body>
@@ -33,4 +24,3 @@ export default function RootLayout({
   );
 }
 
-//  className={`${geistSans.variable} ${geistMono.variable} antialiased`}

@@ -1,14 +1,9 @@
-export default function HomePage() {
-  return (
-    <main className="mx-auto max-w-screen-md px-4 py-6">
-      {/* Global Search */}
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search food, residences, places..."
-          className="w-full rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring"
-        />
-      </div>
-    </main>
-  );
+import SearchBar from "./ui/SearchBar";
+import CategorySection from "./ui/home/CategorySection";
+
+export default function Page() {
+  return <div className="px-4 sm:px-6 max-w-3xl mx-auto">
+    <SearchBar />
+    <CategorySection/>
+  </div>;
 }
