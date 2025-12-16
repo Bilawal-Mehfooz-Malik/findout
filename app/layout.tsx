@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className={`${geistMono.variable} antialiased`}>
-        <AppBar />
+        <AppBar/>
         {children}
       </body>
     </html>

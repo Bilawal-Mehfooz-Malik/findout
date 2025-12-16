@@ -12,7 +12,7 @@ export default function CategoryCard({ icon: Icon, name, href }: Props) {
     return (
         <Link href={href}>
             <Card>
-                <CardHeader>
+                <CardHeader className="flex flex-col items-center gap-2">
                     <Icon />
                     <CardTitle>{name}</CardTitle>
                 </CardHeader>

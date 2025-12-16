@@ -2,15 +2,19 @@ import { hardcoded } from "@/app/lib/i18n";
 import { SearchIcon } from "lucide-react";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../components/input-group";
 
-export default function SearchBar() {
+type Props = {
+    hintText: string;
+}
+
+export default function SearchBar({ hintText }: Props) {
     return (
-        <InputGroup>
-            <InputGroupInput placeholder={hardcoded("Search for residences and resturants near you...")} />
+        <InputGroup className="h-12 p-2">
+            <InputGroupInput className="text-base! pl-4!" placeholder={hintText} />
             <InputGroupAddon>
-                <SearchIcon />
+                <SearchIcon className="h-4.5! w-4.5!"/>
             </InputGroupAddon>
             <InputGroupAddon align="inline-end">
-                <InputGroupButton>{hardcoded("Search")}</InputGroupButton>
+                <InputGroupButton className="h-10 text-base">{hardcoded("Search")}</InputGroupButton>
             </InputGroupAddon>
         </InputGroup>
     );
