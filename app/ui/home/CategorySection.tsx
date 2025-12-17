@@ -1,19 +1,23 @@
 import CategoryCard from "./CategoryCard";
-import { homeCategories } from "@/app/data/categories";
+import { CATEGORIES, CategoryId } from "@/app/data/categories";
 
 export default function CategorySection() {
-    const categories = homeCategories;
+  // Get all the unique IDs for our categories (e.g., 'residences', 'foods').
+  const categoryIds = Object.keys(CATEGORIES) as CategoryId[];
 
+  // This part creates the list of <CategoryCard> components.
+  const categoryCards = categoryIds.map((id) => {
+    const details = CATEGORIES[id];
     return (
-        <div className="grid grid-cols-2 gap-4">
-            {categories.map((c) => (
-                <CategoryCard
-                    key={c.id}
-                    name={c.name}
-                    icon={c.icon}
-                    href={c.href}
-                />
-            ))}
-        </div>
+      <CategoryCard
+        key={details.id}
+        name={details.name}
+        icon={details.icon}
+        href={id}
+      />
     );
+  });
+
+  // Render the list of cards inside a grid layout.
+  return <div className="grid grid-cols-2 gap-4">{categoryCards}</div>;
 }

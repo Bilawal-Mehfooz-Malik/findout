@@ -2,7 +2,7 @@ import Link from "next/link";
 import PrimaryButton from "./PrimaryButton";
 import OutlinedButton from "./OutlinedButton";
 import { hardcoded } from "@/app/lib/i18n";
-
+import { ModeToggle } from "./theme/ModeToggle";
 
 export default function AppBar() {
   return (
@@ -15,6 +15,7 @@ export default function AppBar() {
         <div className="flex items-center gap-3">
           <PrimaryButton label={hardcoded("Log in")} />
           <OutlinedButton label={hardcoded("Sign Up")} />
+          <ModeToggle />
         </div>
       </div>
     </header>
