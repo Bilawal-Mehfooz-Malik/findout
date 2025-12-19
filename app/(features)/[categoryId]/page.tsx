@@ -1,15 +1,24 @@
-import { CATEGORIES, CategoryId } from "@/app/data/categories";
+import { getCategoryBySlug } from "@/app/lib/categories";
 import { notFound } from "next/navigation";
+import CatgoriesAppBar from "./components/CategoriesAppBar";
+import SubCategorySection from "./components/SubCategorySection";
+import PlaceListSection from "./components/PlaceListSection";
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ categoryId: CategoryId }>;
+  params: Promise<{ categoryId: string }>;
 }) {
-  const id = (await params).categoryId;
-  const category = CATEGORIES[id];
-  
+  const categorySlug = (await params).categoryId;
+  const category = getCategoryBySlug(categorySlug);
+
   if (!category) notFound();
 
-  return <h1>{category.name}</h1>;
+  return (
+    <div>
+      <CatgoriesAppBar categoryId={category.id} />
+      <SubCategorySection categoryId={category.id} />
+      <PlaceListSection categoryId={category.id} />
+    </div>
+  );
 }

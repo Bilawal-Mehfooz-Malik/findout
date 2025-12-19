@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import AppBar from "@/app/ui/AppBar";
 import { geistMono, inter } from "@/app/lib/fonts";
 import { ThemeProvider } from "../components/theme-provider";
 
@@ -23,7 +22,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AppBar />
           {children}
         </ThemeProvider>
       </body>

@@ -1,10 +1,10 @@
 import Link from "next/link";
-import PrimaryButton from "./PrimaryButton";
-import OutlinedButton from "./OutlinedButton";
+import PrimaryButton from "../PrimaryButton";
+import OutlinedButton from "../OutlinedButton";
 import { hardcoded } from "@/app/lib/i18n";
-import { ModeToggle } from "./theme/ModeToggle";
+import { ModeToggle } from "../theme/ModeToggle";
 
-export default function AppBar() {
+export default function HomeAppBar() {
   return (
     <header className="sticky top-0 z-50 bg-background text-foreground">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
