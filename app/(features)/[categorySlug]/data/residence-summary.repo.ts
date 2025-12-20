@@ -1,14 +1,13 @@
 import { PlaceId, SubCategoryId } from "@/app/lib/my-data-types";
 import { hardcoded } from "@/app/lib/i18n";
 import sql from "@/app/lib/db";
-import { Residence } from "../domain/residence";
 import {
   mapResidenceSummary,
   ResidenceSummary,
 } from "../domain/residence-summary";
 import { fetchPlacePricing } from "./pricing.repo";
 
-export async function fetchResidenceList() {
+export async function fetchResidenceList(): Promise<ResidenceSummary[]> {
   try {
     const residences = await sql<ResidenceSummary[]>`
       SELECT * FROM residences 
@@ -38,7 +37,7 @@ export async function fetchResidenceListBySubCategoryId({
   subCategoryId,
 }: {
   subCategoryId: SubCategoryId;
-}) {
+}): Promise<ResidenceSummary[]> {
   try {
     const residences = await sql<ResidenceSummary[]>`
       SELECT * FROM residences 
@@ -65,17 +64,23 @@ export async function fetchResidenceListBySubCategoryId({
   }
 }
 
-export async function fetchResidenceById({ placeId }: { placeId: PlaceId }) {
+export async function fetchResidenceBySlug({
+  slug,
+}: {
+  slug: string;
+}): Promise<ResidenceSummary | null> {
   try {
     const [residence] = await sql<ResidenceSummary[]>`
       SELECT * FROM residences 
-      WHERE id = ${placeId} 
+      WHERE slug = ${slug} 
       ORDER BY updated_at DESC
     `;
 
-    const pricing = await fetchPlacePricing(placeId);
+    if (!residence) return null;
 
-    if (!residence || !pricing) return null;
+    const pricing = await fetchPlacePricing(residence.id);
+
+    if (!pricing) return null;
 
     return mapResidenceSummary(residence, pricing);
   } catch (error) {

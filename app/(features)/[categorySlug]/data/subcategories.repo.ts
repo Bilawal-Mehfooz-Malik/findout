@@ -3,11 +3,11 @@ import { mapSubCategory, SubCategory } from "../domain/sub-category";
 import { hardcoded } from "@/app/lib/i18n";
 import sql from "@/app/lib/db";
 
-export async function fetchSubCategories({
+export async function fetchSubCategoriesList({
   categoryId,
 }: {
   categoryId: CategoryId;
-}) {
+}): Promise<SubCategory[]> {
   try {
     const data = await sql<
       SubCategory[]

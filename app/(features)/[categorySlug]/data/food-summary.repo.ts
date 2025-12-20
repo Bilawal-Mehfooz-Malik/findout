@@ -1,10 +1,9 @@
 import { PlaceId, SubCategoryId } from "@/app/lib/my-data-types";
 import { hardcoded } from "@/app/lib/i18n";
 import sql from "@/app/lib/db";
-import { food as Food } from "../domain/food";
 import { FoodSummary, mapFoodSummary } from "../domain/food-summary";
 
-export async function fetchFoodList() {
+export async function fetchFoodList(): Promise<FoodSummary[]> {
   try {
     const data = await sql<FoodSummary[]>`
       SELECT * FROM foods 
@@ -25,7 +24,7 @@ export async function fetchFoodListBySubCategoryId({
   subCategoryId,
 }: {
   subCategoryId: SubCategoryId;
-}) {
+}): Promise<FoodSummary[]> {
   try {
     const data = await sql<FoodSummary[]>`
       SELECT * FROM foods 
@@ -45,11 +44,15 @@ export async function fetchFoodListBySubCategoryId({
   }
 }
 
-export async function fetchFoodById({ placeId }: { placeId: PlaceId }) {
+export async function fetchFoodBySlug({
+  slug,
+}: {
+  slug: string;
+}): Promise<FoodSummary | null> {
   try {
     const [food] = await sql<FoodSummary[]>`
       SELECT * FROM foods 
-      WHERE id = ${placeId}
+      WHERE slug = ${slug}
     `;
 
     if (!food) return null;

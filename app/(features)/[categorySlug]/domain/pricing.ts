@@ -6,7 +6,7 @@ export type Pricing = {
   period: PricingPeriod;
 };
 
-export function mapPricing(pricing: any) {
+export function mapPricing(pricing: any): Pricing {
   return {
     cost: pricing.cost,
     unit: pricing.unit,

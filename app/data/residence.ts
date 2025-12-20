@@ -1,6 +1,6 @@
 import { ListingType } from "@/app/lib/my-data-types";
 import { BasePlace } from "./base-place";
-import { Pricing } from "./pricing";
+import { Pricing } from "../(features)/[categorySlug]/domain/pricing";
 
 export type Residence = BasePlace & {
   listing_type: ListingType;

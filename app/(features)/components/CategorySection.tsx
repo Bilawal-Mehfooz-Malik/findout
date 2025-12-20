@@ -1,8 +1,8 @@
+import { fetchCategoriesList } from "../data/categoy.repo";
 import CategoryCard from "./CategoryCard";
-import { getCategories } from "@/app/lib/categories";
 
 export default function CategorySection() {
-  const categories = getCategories();
+  const categories = fetchCategoriesList();
   // This part creates the list of <CategoryCard> components.
   const categoryCards = categories.map((category) => {
     return (

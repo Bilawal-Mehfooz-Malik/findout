@@ -1,14 +1,14 @@
 import { CategoryId, PlaceId, SubCategoryId } from "@/app/lib/my-data-types";
 import {
-  fetchResidenceById,
+  fetchResidenceBySlug as fetchResidenceBySlug,
   fetchResidenceList,
   fetchResidenceListBySubCategoryId,
-} from "../data/residence.repo";
+} from "../data/residence-summary.repo";
 import {
-  fetchFoodById,
+  fetchFoodBySlug,
   fetchFoodList,
   fetchFoodListBySubCategoryId,
-} from "../data/food.repo";
+} from "../data/food-summary.repo";
 import { hardcoded } from "@/app/lib/i18n";
 
 export async function fetchPlaceList({
@@ -47,18 +47,18 @@ export async function fetchPlaceListBySubCategoryId({
   }
 }
 
-export async function fetchPlaceById({
+export async function fetchPlaceBySlug({
   categoryId,
-  placeId,
+  placeSlug,
 }: {
   categoryId: CategoryId;
-  placeId: PlaceId;
+  placeSlug: string;
 }) {
   switch (categoryId) {
     case 1:
-      return await fetchResidenceById({ placeId });
+      return await fetchResidenceBySlug({ slug: placeSlug });
     case 2:
-      return await fetchFoodById({ placeId });
+      return await fetchFoodBySlug({ slug: placeSlug });
     default:
       throw new Error(
         hardcoded("Invalid category. Please select a valid category.")

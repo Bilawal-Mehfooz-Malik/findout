@@ -10,7 +10,7 @@ type Props = {
 
 export default function CategoryCard({ icon: Icon, name, href }: Props) {
   return (
-    <Link href={href}>
+    <Link href={`/${href}`}>
       <Card>
         <CardHeader className="flex flex-col items-center gap-2">
           <Icon />

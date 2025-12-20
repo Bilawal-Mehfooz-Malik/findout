@@ -1,6 +1,6 @@
-import HomeAppBar from "../ui/home/HomeAppBar";
-import CategorySection from "../ui/home/CategorySection";
-import HomeSearchBar from "../ui/home/HomeSearchBar";
+import HomeAppBar from "./components/HomeAppBar";
+import CategorySection from "./components/CategorySection";
+import HomeSearchBar from "./components/HomeSearchBar";
 
 export default function Page() {
   return (

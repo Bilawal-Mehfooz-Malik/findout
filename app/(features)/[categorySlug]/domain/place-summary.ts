@@ -11,7 +11,7 @@ export type PlaceSummary = {
   reviewCount: number;
 };
 
-export function mapPlaceSummary(place: any) {
+export function mapPlaceSummary(place: any): PlaceSummary {
   return {
     id: place.id,
     slug: place.slug,
