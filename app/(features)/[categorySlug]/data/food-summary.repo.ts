@@ -1,7 +1,11 @@
-import { PlaceId, SubCategoryId } from "@/app/lib/my-data-types";
+import { SubCategoryId } from "@/app/lib/my-data-types";
 import { hardcoded } from "@/app/lib/i18n";
 import sql from "@/app/lib/db";
 import { FoodSummary, mapFoodSummary } from "../domain/food-summary";
+
+interface Props {
+  subCategoryId: SubCategoryId;
+}
 
 export async function fetchFoodList(): Promise<FoodSummary[]> {
   try {
@@ -22,9 +26,7 @@ export async function fetchFoodList(): Promise<FoodSummary[]> {
 
 export async function fetchFoodListBySubCategoryId({
   subCategoryId,
-}: {
-  subCategoryId: SubCategoryId;
-}): Promise<FoodSummary[]> {
+}: Props): Promise<FoodSummary[]> {
   try {
     const data = await sql<FoodSummary[]>`
       SELECT * FROM foods 
@@ -44,25 +46,40 @@ export async function fetchFoodListBySubCategoryId({
   }
 }
 
-export async function fetchFoodBySlug({
-  slug,
-}: {
-  slug: string;
-}): Promise<FoodSummary | null> {
+export async function fetchPopularFoodList(): Promise<FoodSummary[]> {
   try {
-    const [food] = await sql<FoodSummary[]>`
+    const data = await sql<FoodSummary[]>`
       SELECT * FROM foods 
-      WHERE slug = ${slug}
+      WHERE approval_status = 'approved' 
+      AND is_featured = true 
+      ORDER BY updated_at DESC
     `;
 
-    if (!food) return null;
-
-    return mapFoodSummary(food);
+    return data.map(mapFoodSummary);
   } catch (error) {
-    console.error("Fetch Food By Id Error:", error);
+    console.error("Fetch Popular Food List Error:", error);
+    return [];
+  }
+}
+
+export async function fetchPopularFoodListBySubCategoryId({
+  subCategoryId,
+}: Props): Promise<FoodSummary[]> {
+  try {
+    const data = await sql<FoodSummary[]>`
+      SELECT * FROM foods 
+      WHERE sub_category_id = ${subCategoryId} 
+      AND approval_status = 'approved' 
+      AND is_featured = true 
+      ORDER BY updated_at DESC
+    `;
+
+    return data.map(mapFoodSummary);
+  } catch (error) {
+    console.error("Fetch Food List By SubCategoryId Error:", error);
     throw new Error(
       hardcoded(
-        "Oops! We couldn't load this food item. Please try again later."
+        "Oops! We couldn't load the foods for this category. Please try again later."
       )
     );
   }

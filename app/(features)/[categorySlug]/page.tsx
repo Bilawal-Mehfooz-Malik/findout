@@ -1,24 +1,24 @@
 import { notFound } from "next/navigation";
 import CatgoriesAppBar from "./components/CategoriesAppBar";
 import SubCategorySection from "./components/SubCategorySection";
-import PlaceListSection from "./components/PlaceListSection";
+import PlaceSummaryListSection from "./components/PlaceSummaryListSection";
 import { fetchCategoryIdBySlug } from "../data/categoy.repo";
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ categorySlug: string }>;
-}) {
+interface Props {
+  categorySlug: string;
+}
+
+export default async function Page({ params }: { params: Promise<Props> }) {
   const categorySlug = (await params).categorySlug;
   const categoryId = fetchCategoryIdBySlug(categorySlug);
 
   if (!categoryId) notFound();
 
   return (
-    <div>
+    <div className="w-[95%] mx-auto lg:w-6xl">
       <CatgoriesAppBar categoryId={categoryId} />
       <SubCategorySection categoryId={categoryId} />
-      <PlaceListSection categoryId={categoryId} />
+      <PlaceSummaryListSection categoryId={categoryId} />
     </div>
   );
 }

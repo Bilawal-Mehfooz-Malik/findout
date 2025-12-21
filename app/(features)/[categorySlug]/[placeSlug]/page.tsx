@@ -1,19 +1,17 @@
 import { notFound } from "next/navigation";
-import { fetchPlaceBySlug } from "../application/place.service";
 import { fetchCategoryIdBySlug } from "../../data/categoy.repo";
+import { fetchPlaceDetailsBySlug } from "./application/place-details.service";
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{
-    placeSlug: string;
-    categorySlug: string;
-  }>;
-}) {
+interface Props {
+  placeSlug: string;
+  categorySlug: string;
+}
+
+export default async function Page({ params }: { params: Promise<Props> }) {
   const paramsData = await params;
   const categoryId = fetchCategoryIdBySlug(paramsData.categorySlug);
 
-  const place = await fetchPlaceBySlug({
+  const place = await fetchPlaceDetailsBySlug({
     categoryId: categoryId,
     placeSlug: paramsData.placeSlug,
   });

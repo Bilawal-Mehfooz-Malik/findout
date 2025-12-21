@@ -19,10 +19,10 @@ interface Props {
   avgRating: number;
   ratingCount: number;
   pricing?: Pricing;
-  //   availability?: boolean;
+  availability?: boolean;
 }
 
-export function PlaceCard({
+export function PlaceSummaryCard({
   name,
   slug,
   categorySlug,
@@ -32,6 +32,7 @@ export function PlaceCard({
   avgRating,
   ratingCount,
   pricing,
+  availability,
 }: Props) {
   return (
     <Link href={`/${categorySlug}/${slug}`}>
@@ -59,6 +60,9 @@ export function PlaceCard({
               <p>
                 {pricing.cost} {pricing.period} {pricing.unit}
               </p>
+            )}
+            {availability && (
+              <p>{availability ? "Available" : "Not Available"}</p>
             )}
           </CardHeader>
         </CardContent>

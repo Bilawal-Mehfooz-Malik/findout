@@ -17,6 +17,7 @@ export default async function SubCategorySection({ categoryId }: Props) {
           key={subcategory.id}
           label={subcategory.name}
           selected={false}
+          
         />
       ))}
     </>

@@ -16,5 +16,5 @@ export default function CategorySection() {
   });
 
   // Render the list of cards inside a grid layout.
-  return <div className="grid grid-cols-2 gap-4">{categoryCards}</div>;
+  return <div className="mt-4 grid grid-cols-2 gap-4">{categoryCards}</div>;
 }

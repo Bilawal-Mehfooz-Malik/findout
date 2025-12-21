@@ -7,6 +7,10 @@ import {
 } from "../domain/residence-summary";
 import { fetchPlacePricing } from "./pricing.repo";
 
+interface Props {
+  subCategoryId: SubCategoryId;
+}
+
 export async function fetchResidenceList(): Promise<ResidenceSummary[]> {
   try {
     const residences = await sql<ResidenceSummary[]>`
@@ -35,9 +39,7 @@ export async function fetchResidenceList(): Promise<ResidenceSummary[]> {
 
 export async function fetchResidenceListBySubCategoryId({
   subCategoryId,
-}: {
-  subCategoryId: SubCategoryId;
-}): Promise<ResidenceSummary[]> {
+}: Props): Promise<ResidenceSummary[]> {
   try {
     const residences = await sql<ResidenceSummary[]>`
       SELECT * FROM residences 
@@ -64,30 +66,54 @@ export async function fetchResidenceListBySubCategoryId({
   }
 }
 
-export async function fetchResidenceBySlug({
-  slug,
-}: {
-  slug: string;
-}): Promise<ResidenceSummary | null> {
+export async function fetchPopularResidenceList(): Promise<ResidenceSummary[]> {
   try {
-    const [residence] = await sql<ResidenceSummary[]>`
+    const residences = await sql<ResidenceSummary[]>`
       SELECT * FROM residences 
-      WHERE slug = ${slug} 
+      WHERE approval_status = 'approved' 
+      AND is_featured = true 
       ORDER BY updated_at DESC
     `;
 
-    if (!residence) return null;
+    const residenceSummaries = await Promise.all(
+      residences.map(async (res) => {
+        const pricing = await fetchPlacePricing(res.id);
+        return mapResidenceSummary(res, pricing);
+      })
+    );
 
-    const pricing = await fetchPlacePricing(residence.id);
-
-    if (!pricing) return null;
-
-    return mapResidenceSummary(residence, pricing);
+    return residenceSummaries;
   } catch (error) {
-    console.error("Fetch Residence By Id Error:", error);
+    console.error("Fetch Residence List Error:", error);
+    return [];
+  }
+}
+
+export async function fetchPopularResidenceListBySubCategoryId({
+  subCategoryId,
+}: Props): Promise<ResidenceSummary[]> {
+  try {
+    const residences = await sql<ResidenceSummary[]>`
+      SELECT * FROM residences 
+      WHERE sub_category_id = ${subCategoryId} 
+      AND approval_status = 'approved' 
+      AND is_featured = true 
+      ORDER BY updated_at DESC
+    `;
+
+    const residenceSummaries = await Promise.all(
+      residences.map(async (res) => {
+        const pricing = await fetchPlacePricing(res.id);
+        return mapResidenceSummary(res, pricing);
+      })
+    );
+
+    return residenceSummaries;
+  } catch (error) {
+    console.error("Fetch Residence List By SubCategoryId Error:", error);
     throw new Error(
       hardcoded(
-        "Oops! We couldn't load this residence. Please try again later."
+        "Oops! We couldn't load residences for this category. Please try again later."
       )
     );
   }

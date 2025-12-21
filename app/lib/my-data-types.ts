@@ -19,7 +19,6 @@ export type PricingPeriod =
   | "weekly"
   | "monthly"
   | "yearly";
-  
 
 // ids
 export type CategoryId = Brand<number, "CategoryId">;

@@ -8,7 +8,11 @@ interface Props {
 
 export function SubCategoryChip({ label, selected = false, onClick }: Props) {
   return (
-    <Badge variant={selected ? "default" : "outline"} onClick={onClick}>
+    <Badge
+      className="p-8"
+      variant={selected ? "default" : "outline"}
+      onClick={onClick}
+    >
       {label}
     </Badge>
   );

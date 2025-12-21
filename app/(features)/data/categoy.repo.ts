@@ -1,5 +1,5 @@
 import { hardcoded } from "@/app/lib/i18n";
-import { CATEGORIES, type Category } from "../domain/categories";
+import { CATEGORIES, Category } from "../domain/categories";
 import { CategoryId } from "@/app/lib/my-data-types";
 
 export function fetchCategoriesList(): Category[] {

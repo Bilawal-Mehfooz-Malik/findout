@@ -7,9 +7,10 @@ export async function fetchPlacePricing(placeId: PlaceId): Promise<Pricing> {
   try {
     const [pricing] =
       await sql`SELECT * from pricings where place_id=${placeId}`;
+    if (!pricing) throw new Error("Pricing not found");
     return mapPricing(pricing);
   } catch (error) {
     console.error(error);
-    throw new Error(hardcoded("Failed to fetch place pricing"));
+    throw new Error(hardcoded("Failed to fetch place pricing."));
   }
 }
