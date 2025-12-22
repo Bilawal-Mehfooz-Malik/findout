@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/app/components/card";
-
 import Image from "next/image";
 import { Pricing } from "../domain/pricing";
 import Link from "next/link";
@@ -43,22 +42,20 @@ export function PlaceSummaryCard({
   operationalStatus,
 }: Props) {
   return (
-    <Link href={`/${categorySlug}/${slug}`} className={cn("group block")}>
-      <Card
-        className={cn("overflow-hidden transition-shadow hover:shadow-md pt-0")}
-      >
-        {/* Image */}
-        <div className={cn("w-full h-48 bg-muted")}>
+    <Link href={`/${categorySlug}/${slug}`} className="group block">
+      <Card className="overflow-hidden transition-shadow hover:shadow-md w-[250px] pt-0">
+        {/* Image with 4:3 aspect ratio */}
+        <div className="relative w-full h-[187.5px] bg-muted">
           {coverImageUrl && (
             <Image
               src={coverImageUrl}
               alt={name}
               fill
-              className={cn("object-cover")}
+              className="object-cover"
             />
           )}
           {/* Status Indicator overlay */}
-          <div className={cn("absolute bottom-2 left-2 z-10")}>
+          <div className="absolute bottom-2 left-2 z-10">
             <StatusIndicator
               availability={availability}
               operationalStatus={operationalStatus}
@@ -68,8 +65,8 @@ export function PlaceSummaryCard({
 
         {/* Content */}
         <CardHeader>
-          <CardTitle className={cn("line-clamp-2")}>{name}</CardTitle>
-          <CardDescription className={cn("line-clamp-1")}>
+          <CardTitle className="line-clamp-2">{name}</CardTitle>
+          <CardDescription className="line-clamp-1">
             {cityName}, {streetAddress}
           </CardDescription>
         </CardHeader>
@@ -79,15 +76,14 @@ export function PlaceSummaryCard({
             `flex items-center ${pricing ? "justify-between" : "justify-start"}`
           )}
         >
-          {/* Pricing (left, optional) */}
+          {/* Pricing */}
           {pricing &&
             (() => {
               const p = formatPricing(pricing);
-
               return (
-                <p className={cn("text-sm font-semibold")}>
+                <p className="text-sm font-semibold">
                   {p.cost}
-                  <span className={cn("ml-1 text-xs text-muted-foreground")}>
+                  <span className="ml-1 text-xs text-muted-foreground">
                     / {p.period} · per {p.unit}
                   </span>
                 </p>
@@ -95,12 +91,10 @@ export function PlaceSummaryCard({
             })()}
 
           {/* Rating */}
-          <div className={cn("flex items-center gap-1 text-sm font-medium")}>
-            <StarIcon
-              className={cn("h-4 w-4 fill-yellow-400 text-yellow-400")}
-            />
+          <div className="flex items-center gap-1 text-sm font-medium">
+            <StarIcon className="h-4 w-4 fill-yellow-400 text-yellow-400" />
             <span>{avgRating}</span>
-            <span className={cn("text-muted-foreground")}>({ratingCount})</span>
+            <span className="text-muted-foreground">({ratingCount})</span>
           </div>
         </CardContent>
       </Card>
