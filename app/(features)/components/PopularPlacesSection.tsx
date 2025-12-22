@@ -1,25 +1,25 @@
 import { CategoryId } from "@/app/lib/my-data-types";
-import { fetchPopularResidenceList } from "../[categorySlug]/data/residence-summary.repo";
-import { fetchPopularFoodList } from "../[categorySlug]/data/food-summary.repo";
-import { PlaceSummaryCard } from "../[categorySlug]/components/PlaceSummaryCard";
-import { fetchCategorySlugById } from "../data/categoy.repo";
 import ErrorSection from "@/app/ui/ErrorSection";
 import { hardcoded } from "@/app/lib/i18n";
+import { fetchPopularPlaces } from "../application/popular-places.service";
+import { FoodSummary } from "../[categorySlug]/domain/food-summary";
+import { ResidenceSummary } from "../[categorySlug]/domain/residence-summary";
+import { PlacesCarousel } from "./PlacesCarousel";
 
 interface Props {
+  title: string;
   categoryId: CategoryId;
 }
 
-export default async function PopularPlacesSection({ categoryId }: Props) {
-  let places: any[] = [];
+export default async function PopularPlacesSection({
+  title,
+  categoryId,
+}: Props) {
+  let places: (FoodSummary | ResidenceSummary)[] = [];
   let errorMessage: string | null = null;
 
   try {
-    if (categoryId === 1) {
-      places = await fetchPopularResidenceList();
-    } else if (categoryId === 2) {
-      places = await fetchPopularFoodList();
-    }
+    places = await fetchPopularPlaces(categoryId);
   } catch (error: any) {
     console.error("Error fetching popular places:", error);
     errorMessage =
@@ -35,27 +35,12 @@ export default async function PopularPlacesSection({ categoryId }: Props) {
     );
   }
 
-  return (
-    <div className="mt-4 grid grid-cols-2 gap-4">
-      {places.map((place) => {
-        const categorySlug = fetchCategorySlugById(categoryId);
+  // If there are no places, don't render the section
+  if (places.length === 0) {
+    return null;
+  }
 
-        return (
-          <PlaceSummaryCard
-            key={place.id}
-            name={place.name}
-            categorySlug={categorySlug}
-            slug={place.slug}
-            coverImageUrl={place.coverImageUrl}
-            cityName={place.city}
-            streetAddress={place.streetAddress}
-            avgRating={place.avgRating}
-            ratingCount={place.reviewCount}
-            pricing={place.pricing}
-            availability={place.availability}
-          />
-        );
-      })}
-    </div>
+  return (
+    <PlacesCarousel title={title} categoryId={categoryId} places={places} />
   );
 }

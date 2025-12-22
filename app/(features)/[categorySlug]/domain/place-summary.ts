@@ -1,4 +1,8 @@
-import { CategoryId, PlaceId } from "@/app/lib/my-data-types";
+import {
+  CategoryId,
+  OperationalStatus,
+  PlaceId,
+} from "@/app/lib/my-data-types";
 
 export type PlaceSummary = {
   id: PlaceId;
@@ -7,6 +11,7 @@ export type PlaceSummary = {
   name: string;
   city: string;
   streetAddress: string;
+  operationalStatus: OperationalStatus;
   coverImageUrl: string;
   avgRating: number;
   reviewCount: number;
@@ -20,6 +25,7 @@ export function mapPlaceSummary(place: any): PlaceSummary {
     name: place.name,
     city: place.city,
     streetAddress: place.street_address,
+    operationalStatus: place.operational_status,
     coverImageUrl: place.cover_image,
     avgRating: place.avg_rating,
     reviewCount: place.review_count,
