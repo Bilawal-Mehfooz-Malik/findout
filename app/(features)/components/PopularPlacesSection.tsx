@@ -28,11 +28,7 @@ export default async function PopularPlacesSection({
   }
 
   if (errorMessage) {
-    return (
-      <div className="mt-4">
-        <ErrorSection message={errorMessage} />
-      </div>
-    );
+    return <ErrorSection message={errorMessage} />;
   }
 
   // If there are no places, don't render the section

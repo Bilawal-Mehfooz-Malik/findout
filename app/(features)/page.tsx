@@ -4,10 +4,11 @@ import HomeSearchBar from "./components/HomeSearchBar";
 import PopularPlacesSection from "./components/PopularPlacesSection";
 import { CategoryId } from "../lib/my-data-types";
 import { hardcoded } from "../lib/i18n";
+import { cn } from "../lib/utils";
 
 export default function Page() {
   return (
-    <div>
+    <div className="space-y-4 pb-8">
       <HomeAppBar />
       <HomeSearchBar />
       <CategorySection />

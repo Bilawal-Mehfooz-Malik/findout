@@ -1,9 +1,10 @@
 import { Button } from "../components/button";
 
-type PrimaryButtonProps = {
+type Props = {
   label: string;
+  onClick?: () => void;
 };
 
-export default function PrimaryButton({ label }: PrimaryButtonProps) {
-  return <Button>{label}</Button>;
+export default function PrimaryButton({ label, onClick }: Props) {
+  return <Button onClick={onClick}>{label}</Button>;
 }

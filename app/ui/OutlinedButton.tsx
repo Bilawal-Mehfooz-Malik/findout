@@ -1,9 +1,14 @@
 import { Button } from "../components/button";
 
-type OutlinedButtonProps = {
+type Props = {
   label: string;
+  onClick?: () => void;
 };
 
-export default function OutlinedButton({ label }: OutlinedButtonProps) {
-  return <Button variant="outline" >{label}</Button>;
+export default function OutlinedButton({ label, onClick }: Props) {
+  return (
+    <Button onClick={onClick} variant="outline">
+      {label}
+    </Button>
+  );
 }
