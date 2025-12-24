@@ -18,7 +18,7 @@ export default function TextButton({
       variant="ghost"
       size="lg"
       className={cn(
-        "rounded-full px-6 font-semibold text-[15px] h-11",
+        "rounded-full px-6 font-medium text-[15px] h-11",
         className
       )}
     >

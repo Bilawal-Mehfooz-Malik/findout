@@ -13,7 +13,7 @@ export default function PrimaryButton({ label, onClick, className }: Props) {
       onClick={onClick}
       size="lg"
       className={cn(
-        "h-11 rounded-full px-6 text-[15px] font-semibold",
+        "h-11 rounded-full px-6 text-[15px] font-medium",
         className
       )}
     >

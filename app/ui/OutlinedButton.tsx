@@ -14,7 +14,7 @@ export default function OutlinedButton({ label, onClick, className }: Props) {
       variant="outline"
       size="lg"
       className={cn(
-        "rounded-full px-6 text-[15px] font-semibold h-11",
+        "rounded-full px-6 text-[15px] font-medium h-11",
         className
       )}
     >
