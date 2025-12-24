@@ -26,10 +26,10 @@ function formatCurrency(amount: number) {
 
 export const PRICING_PERIOD_LABEL: Record<PricingPeriod, string> = {
   oneTime: "one time",
-  daily: "day",
-  weekly: "week",
-  monthly: "month",
-  yearly: "year",
+  daily: "daily",
+  weekly: "weekly",
+  monthly: "monthly",
+  yearly: "yearly",
 };
 
 export const PRICING_UNIT_LABEL: Record<PricingUnit, string> = {

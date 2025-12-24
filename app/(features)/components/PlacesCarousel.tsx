@@ -25,7 +25,7 @@ export function PlacesCarousel({ title, categoryId, places }: Props) {
     <Carousel className={cn("max-w-6xl mx-auto w-[95%]")}>
       {/* Header row */}
       <div className="flex items-center justify-between w-full">
-        <h2 className="text-2xl font-semibold leading-8">{title}</h2>
+        <h2 className="text-xl font-semibold leading-8">{title}</h2>
 
         <div className="hidden sm:flex gap-2">
           <CarouselPrevious className="h-8 w-8" />
@@ -47,7 +47,6 @@ export function PlacesCarousel({ title, categoryId, places }: Props) {
                 cityName={place.city}
                 streetAddress={place.streetAddress}
                 avgRating={place.avgRating}
-                ratingCount={place.reviewCount}
                 pricing={(place as ResidenceSummary).pricing}
                 availability={(place as ResidenceSummary).availability}
                 operationalStatus={place.operationalStatus}

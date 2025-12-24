@@ -1,10 +1,3 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/app/components/card";
 import Image from "next/image";
 import { Pricing } from "../domain/pricing";
 import Link from "next/link";
@@ -12,7 +5,6 @@ import { StarIcon } from "lucide-react";
 import { formatPricing } from "@/app/lib/pricing.formatter";
 import { StatusIndicator } from "@/app/ui/StatusIndicator";
 import { OperationalStatus } from "@/app/lib/my-data-types";
-import { cn } from "@/app/lib/utils";
 
 interface Props {
   name: string;
@@ -22,12 +14,10 @@ interface Props {
   cityName: string;
   streetAddress: string;
   avgRating: number;
-  ratingCount: number;
   operationalStatus: OperationalStatus;
   pricing?: Pricing;
   availability?: boolean;
 }
-
 export function PlaceSummaryCard({
   name,
   slug,
@@ -36,26 +26,35 @@ export function PlaceSummaryCard({
   cityName,
   streetAddress,
   avgRating,
-  ratingCount,
   pricing,
   availability,
   operationalStatus,
 }: Props) {
+  const p = pricing ? formatPricing(pricing) : null;
+
   return (
-    <Link href={`/${categorySlug}/${slug}`} className="group block">
-      <Card className="overflow-hidden transition-shadow hover:shadow-md w-[250px] pt-0">
-        {/* Image with 4:3 aspect ratio */}
-        <div className="relative w-full h-[187.5px] bg-muted">
+    <Link
+      href={`/${categorySlug}/${slug}`}
+      className="group block w-[280px] shrink-0"
+    >
+      <div className="flex flex-col gap-3">
+        {/* 1. Image: Forced 4:3 Aspect Ratio */}
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-zinc-100">
           {coverImageUrl && (
             <Image
               src={coverImageUrl}
               alt={name}
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              sizes="280px"
             />
           )}
-          {/* Status Indicator overlay */}
-          <div className="absolute bottom-2 left-2 z-10">
+
+          {/* Top-down shadow overlay to make white text/icons readable */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+
+          {/* Status Badge (Bottom Left) */}
+          <div className="absolute bottom-3 left-3 z-10">
             <StatusIndicator
               availability={availability}
               operationalStatus={operationalStatus}
@@ -63,41 +62,36 @@ export function PlaceSummaryCard({
           </div>
         </div>
 
-        {/* Content */}
-        <CardHeader>
-          <CardTitle className="line-clamp-2">{name}</CardTitle>
-          <CardDescription className="line-clamp-1">
-            {cityName}, {streetAddress}
-          </CardDescription>
-        </CardHeader>
+        {/* 2. Info Section */}
+        <div className="space-y-1">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="font-semibold text-[16px] text-zinc-900 dark:text-zinc-100 line-clamp-1">
+              {name}
+            </h3>
 
-        <CardContent
-          className={cn(
-            `flex items-center ${pricing ? "justify-between" : "justify-start"}`
-          )}
-        >
-          {/* Pricing */}
-          {pricing &&
-            (() => {
-              const p = formatPricing(pricing);
-              return (
-                <p className="text-sm font-semibold">
-                  {p.cost}
-                  <span className="ml-1 text-xs text-muted-foreground">
-                    / {p.period} · per {p.unit}
-                  </span>
-                </p>
-              );
-            })()}
-
-          {/* Rating */}
-          <div className="flex items-center gap-1 text-sm font-medium">
-            <StarIcon className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            <span>{avgRating}</span>
-            <span className="text-muted-foreground">({ratingCount})</span>
+            {/* Rating next to title for a cleaner look */}
+            <div className="flex items-center gap-1 pt-0.5">
+              <StarIcon className="h-3.5 w-3.5 fill-current text-zinc-900 dark:text-zinc-100" />
+              <span className="text-sm font-medium">{avgRating}</span>
+            </div>
           </div>
-        </CardContent>
-      </Card>
+
+          <p className="text-sm text-zinc-500">
+            {cityName}, {streetAddress}
+          </p>
+
+          {/* Pricing - Industry standard formatting */}
+          {p && (
+            <p className="text-[15px] font-bold mt-1 text-zinc-900 dark:text-zinc-50">
+              {p.cost}
+              <span className="text-zinc-500 font-normal text-[13px]">
+                {" "}
+                / {p.period} / {p.unit}
+              </span>
+            </p>
+          )}
+        </div>
+      </div>
     </Link>
   );
 }
