@@ -11,7 +11,7 @@ export default function HomeAppBar() {
         {/* Logo Section */}
         <Link
           href="/"
-          className="group flex items-center gap-1 text-2xl font-bold transition-opacity hover:opacity-80"
+          className="group flex items-center gap-1 text-3xl font-bold transition-opacity hover:opacity-80"
         >
           {hardcoded("FindOut")}
         </Link>

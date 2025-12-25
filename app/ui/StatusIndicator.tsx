@@ -1,17 +1,31 @@
-import { OperationalStatus } from "@/app/lib/my-data-types";
+import { OperationalStatus, PlaceId } from "@/app/lib/my-data-types";
 import { getStatusIndicator } from "../lib/status.formatter";
 import { cn } from "../lib/utils";
 
 export type Props = {
+  placeId: PlaceId;
   availability?: boolean;
   operationalStatus?: OperationalStatus;
 };
 
-export function StatusIndicator({ availability, operationalStatus }: Props) {
-  const status = getStatusIndicator({
+export async function StatusIndicator({
+  placeId,
+  availability,
+  operationalStatus,
+}: Props) {
+  if (!placeId) {
+    return null;
+  }
+
+  const status = await getStatusIndicator({
+    placeId,
     availability,
     operationalStatus,
   });
+
+  if (status.label === "Status unknown") {
+    return null;
+  }
 
   return (
     <div
@@ -21,7 +35,6 @@ export function StatusIndicator({ availability, operationalStatus }: Props) {
         "dark:bg-black/50 dark:border-white/10"
       )}
     >
-      {/* Simple Dot */}
       <span
         className={cn(
           "inline-flex h-2 w-2 rounded-full border",

@@ -4,7 +4,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
+} from "@/app/components/carousel";
 import { cn } from "@/app/lib/utils";
 
 interface CustomCarouselProps {

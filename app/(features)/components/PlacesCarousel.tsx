@@ -21,6 +21,7 @@ export function PlacesCarousel({ title, places, categoryId }: Props) {
           const categorySlug = fetchCategorySlugById(categoryId);
           return (
             <PlaceSummaryCard
+              id={place.id}
               name={place.name}
               categorySlug={categorySlug}
               slug={place.slug}

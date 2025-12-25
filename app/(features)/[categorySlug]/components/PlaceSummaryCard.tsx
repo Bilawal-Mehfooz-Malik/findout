@@ -4,9 +4,10 @@ import Link from "next/link";
 import { StarIcon } from "lucide-react";
 import { formatPricing } from "@/app/lib/pricing.formatter";
 import { StatusIndicator } from "@/app/ui/StatusIndicator";
-import { OperationalStatus } from "@/app/lib/my-data-types";
+import { OperationalStatus, PlaceId } from "@/app/lib/my-data-types";
 
 interface Props {
+  id: PlaceId;
   name: string;
   categorySlug: string;
   slug: string;
@@ -18,7 +19,9 @@ interface Props {
   pricing?: Pricing;
   availability?: boolean;
 }
+
 export function PlaceSummaryCard({
+  id,
   name,
   slug,
   categorySlug,
@@ -56,6 +59,7 @@ export function PlaceSummaryCard({
           {/* Status Badge (Bottom Left) */}
           <div className="absolute bottom-3 left-3 z-10">
             <StatusIndicator
+              placeId={id}
               availability={availability}
               operationalStatus={operationalStatus}
             />
