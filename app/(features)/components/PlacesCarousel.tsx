@@ -1,60 +1,40 @@
-"use client";
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { PlaceSummaryCard } from "../[categorySlug]/components/PlaceSummaryCard";
+import { MyCarousel } from "@/app/ui/MyCarousel";
 import { fetchCategorySlugById } from "../data/categoy.repo";
-import { CategoryId } from "@/app/lib/my-data-types";
-import { FoodSummary } from "../[categorySlug]/domain/food-summary";
+import { PlaceSummaryCard } from "../[categorySlug]/components/PlaceSummaryCard";
 import { ResidenceSummary } from "../[categorySlug]/domain/residence-summary";
-import { cn } from "@/app/lib/utils";
+import { FoodSummary } from "../[categorySlug]/domain/food-summary";
+import { CategoryId } from "@/app/lib/my-data-types";
 
 interface Props {
   title: string;
+  places: (ResidenceSummary | FoodSummary)[];
   categoryId: CategoryId;
-  places: (FoodSummary | ResidenceSummary)[];
 }
 
-export function PlacesCarousel({ title, categoryId, places }: Props) {
+export function PlacesCarousel({ title, places, categoryId }: Props) {
   return (
-    <Carousel className={cn("max-w-6xl mx-auto w-[95%]")}>
-      {/* Header row */}
-      <div className="flex items-center justify-between w-full">
-        <h2 className="text-xl font-semibold leading-8">{title}</h2>
+    <div className="max-w-6xl mx-auto w-[95%]">
+      <h2 className="text-xl font-bold">{title}</h2>
 
-        <div className="hidden sm:flex gap-2">
-          <CarouselPrevious className="h-8 w-8" />
-          <CarouselNext className="h-8 w-8" />
-        </div>
-      </div>
-
-      {/* CarouselContent */}
-      <CarouselContent>
+      <MyCarousel>
         {places.map((place) => {
           const categorySlug = fetchCategorySlugById(categoryId);
           return (
-            <CarouselItem key={place.id} className={cn("flex-none py-2")}>
-              <PlaceSummaryCard
-                name={place.name}
-                categorySlug={categorySlug}
-                slug={place.slug}
-                coverImageUrl={place.coverImageUrl}
-                cityName={place.city}
-                streetAddress={place.streetAddress}
-                avgRating={place.avgRating}
-                pricing={(place as ResidenceSummary).pricing}
-                availability={(place as ResidenceSummary).availability}
-                operationalStatus={place.operationalStatus}
-              />
-            </CarouselItem>
+            <PlaceSummaryCard
+              name={place.name}
+              categorySlug={categorySlug}
+              slug={place.slug}
+              coverImageUrl={place.coverImageUrl}
+              cityName={place.city}
+              streetAddress={place.streetAddress}
+              avgRating={place.avgRating}
+              pricing={(place as ResidenceSummary).pricing}
+              availability={(place as ResidenceSummary).availability}
+              operationalStatus={place.operationalStatus}
+            />
           );
         })}
-      </CarouselContent>
-    </Carousel>
+      </MyCarousel>
+    </div>
   );
 }

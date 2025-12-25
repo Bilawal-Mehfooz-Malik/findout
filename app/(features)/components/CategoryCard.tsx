@@ -19,27 +19,31 @@ export default function CategoryCard({
 }: Props) {
   return (
     <Link href={`/${href}`} className="group block">
-      <Card className="relative overflow-hidden border-muted/60 transition-all duration-300 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10">
+      <Card
+        className={cn(
+          "relative overflow-hidden border-muted/60 transition-all duration-300 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10"
+        )}
+      >
         {/* 1. The Background Glow */}
         <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/5 blur-3xl" />
 
-        <CardHeader className="flex flex-col items-center justify-center space-y-4 p-4">
+        <CardHeader className="flex flex-col items-center justify-center p-1 space-y-1 sm:space-y-4 sm:p-4">
           {/* 2. The Icon Container */}
           <div
             className={cn(
-              "flex h-16 w-16 items-center justify-center rounded-full ",
+              "flex h-15 w-15 items-center justify-center rounded-full ",
               color
             )}
           >
-            <Icon className="h-7 w-7 stroke-[1.5]" />
+            <Icon className="h-6 w-6 stroke-[1.5]" />
           </div>
 
           {/* 3. Typography & Hierarchy */}
-          <div className="space-y-1 text-center">
-            <CardTitle className="text-base font-semibold tracking-tight">
+          <div className="sm:space-y-1 text-center">
+            <CardTitle className={cn("text-base font-semibold tracking-tight")}>
               {name}
             </CardTitle>
-            <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground opacity-70 hidden sm:block">
+            <p className="sm:text-[11px] font-medium uppercase tracking-widest text-muted-foreground opacity-70 hidden sm:block">
               {hardcoded("Browse Collection")}
             </p>
           </div>

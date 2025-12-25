@@ -7,7 +7,7 @@ import OutlinedButton from "@/app/ui/OutlinedButton";
 export default function HomeAppBar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-100 bg-white/80 backdrop-blur-md dark:border-zinc-800/50 dark:bg-zinc-950/80">
-      <div className="mx-auto flex h-16 w-[95%] max-w-7xl items-center justify-between">
+      <div className="mx-auto flex h-16 w-[95%] max-w-8xl items-center justify-between">
         {/* Logo Section */}
         <Link
           href="/"

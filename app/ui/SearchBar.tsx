@@ -26,7 +26,7 @@ export default function SearchBar({ hintText }: { hintText: string }) {
         />
 
         {/* Button */}
-        <PrimaryButton label={hardcoded("Search")} />
+        {/* <PrimaryButton label={hardcoded("Search")} /> */}
       </div>
     </div>
   );
