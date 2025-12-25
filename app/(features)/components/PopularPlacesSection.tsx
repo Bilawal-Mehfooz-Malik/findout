@@ -1,10 +1,10 @@
 import { CategoryId } from "@/app/lib/my-data-types";
-import ErrorSection from "@/app/ui/ErrorSection";
 import { hardcoded } from "@/app/lib/i18n";
 import { fetchPopularPlaces } from "../application/popular-places.service";
 import { FoodSummary } from "../[categorySlug]/domain/food-summary";
 import { ResidenceSummary } from "../[categorySlug]/domain/residence-summary";
 import { PlacesCarousel } from "./PlacesCarousel";
+import PopularPlacesErrorSection from "./PopularPlacesErrorSection";
 
 interface Props {
   title: string;
@@ -28,7 +28,7 @@ export default async function PopularPlacesSection({
   }
 
   if (errorMessage) {
-    return <ErrorSection message={errorMessage} />;
+    return <PopularPlacesErrorSection message={errorMessage} />;
   }
 
   // If there are no places, don't render the section

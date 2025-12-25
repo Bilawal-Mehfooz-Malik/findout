@@ -1,26 +1,18 @@
-"use client";
-
-import { Button } from "../components/button";
 import { hardcoded } from "../lib/i18n";
-import { cn } from "../lib/utils";
-import OutlinedButton from "./OutlinedButton";
+import ErrorButton from "./ErrorButton";
 
 interface Props {
   message: string;
   onRetry?: () => void;
 }
-
 export default function ErrorSection({ message, onRetry }: Props) {
   return (
-    <div
-      className={cn(
-        "flex flex-col items-center justify-center gap-4 p-6 border rounded-md bg-red-50 text-red-700 w-[95%] mx-auto max-w-6xl"
-      )}
-    >
-      <p className={cn("text-center text-lg font-medium")}>{message}</p>
-      {onRetry && (
-        <OutlinedButton onClick={onRetry} label={hardcoded("Retry")} />
-      )}
+    <div className="flex flex-col items-center justify-center py-8 px-6 rounded-xl bg-secondary/50 w-[95%] max-w-6xl mx-auto">
+      <p className="text-muted-foreground font-medium mb-4 text-center max-w-[250px]">
+        {message}
+      </p>
+
+      <ErrorButton onClick={onRetry} label={hardcoded("Try Again")} />
     </div>
   );
 }
