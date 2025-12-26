@@ -72,7 +72,7 @@ export function PlaceSummaryCard({
         {/* 2. Info Section */}
         <div className="space-y-1">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-semibold text-[16px] text-zinc-900 dark:text-zinc-100 line-clamp-1">
+            <h3 className="font-semibold text-[16px] text-zinc-900 dark:text-zinc-100 line-clamp-2">
               {name}
             </h3>
 
@@ -87,7 +87,7 @@ export function PlaceSummaryCard({
             </div>
           </div>
 
-          <p className="text-sm text-zinc-500">
+          <p className="text-sm text-zinc-500 line-clamp-2">
             {cityName}, {streetAddress}
           </p>
 
