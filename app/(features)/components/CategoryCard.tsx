@@ -27,7 +27,11 @@ export default function CategoryCard({
         {/* 1. The Background Glow */}
         <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/5 blur-3xl" />
 
-        <CardHeader className="flex flex-col items-center justify-center p-1 space-y-1 sm:space-y-4 sm:p-4">
+        <CardHeader
+          className={cn(
+            "flex flex-col items-center justify-center p-1 space-y-1 sm:space-y-4 sm:p-4"
+          )}
+        >
           {/* 2. The Icon Container */}
           <div
             className={cn(
@@ -35,7 +39,7 @@ export default function CategoryCard({
               color
             )}
           >
-            <Icon className="h-6 w-6 stroke-[1.5]" />
+            <Icon className={cn("h-6 w-6 stroke-[1.5]")} />
           </div>
 
           {/* 3. Typography & Hierarchy */}

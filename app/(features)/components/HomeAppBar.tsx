@@ -3,15 +3,22 @@ import PrimaryButton from "../../ui/PrimaryButton";
 import { hardcoded } from "@/app/lib/i18n";
 import { ModeToggle } from "../../ui/theme/ModeToggle";
 import OutlinedButton from "@/app/ui/OutlinedButton";
+import { cn } from "@/app/lib/utils";
 
 export default function HomeAppBar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-zinc-100 bg-white/80 backdrop-blur-md dark:border-zinc-800/50 dark:bg-zinc-950/80">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full border-b border-zinc-100 bg-white/80 backdrop-blur-md dark:border-zinc-800/50 dark:bg-zinc-950/80"
+      )}
+    >
       <div className="mx-auto flex h-16 w-[95%] max-w-8xl items-center justify-between">
         {/* Logo Section */}
         <Link
           href="/"
-          className="group flex items-center gap-1 text-3xl font-bold transition-opacity hover:opacity-80"
+          className={cn(
+            "group flex items-center gap-1 text-3xl font-bold transition-opacity hover:opacity-80"
+          )}
         >
           {hardcoded("FindOut")}
         </Link>

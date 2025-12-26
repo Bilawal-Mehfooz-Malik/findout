@@ -5,6 +5,7 @@ import { StarIcon } from "lucide-react";
 import { formatPricing } from "@/app/lib/pricing.formatter";
 import { StatusIndicator } from "@/app/ui/StatusIndicator";
 import { OperationalStatus, PlaceId } from "@/app/lib/my-data-types";
+import { cn } from "@/app/lib/utils";
 
 interface Props {
   id: PlaceId;
@@ -38,7 +39,7 @@ export function PlaceSummaryCard({
   return (
     <Link
       href={`/${categorySlug}/${slug}`}
-      className="group block w-[280px] shrink-0"
+      className={cn("group block w-[280px] shrink-0")}
     >
       <div className="flex flex-col gap-3">
         {/* 1. Image: Forced 4:3 Aspect Ratio */}
@@ -48,7 +49,9 @@ export function PlaceSummaryCard({
               src={coverImageUrl}
               alt={name}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              className={cn(
+                "object-cover transition-transform duration-500 group-hover:scale-110"
+              )}
               sizes="280px"
             />
           )}
@@ -75,7 +78,11 @@ export function PlaceSummaryCard({
 
             {/* Rating next to title for a cleaner look */}
             <div className="flex items-center gap-1 pt-0.5">
-              <StarIcon className="h-3.5 w-3.5 fill-current text-zinc-900 dark:text-zinc-100" />
+              <StarIcon
+                className={cn(
+                  "h-3.5 w-3.5 fill-current text-zinc-900 dark:text-zinc-100"
+                )}
+              />
               <span className="text-sm font-medium">{avgRating}</span>
             </div>
           </div>

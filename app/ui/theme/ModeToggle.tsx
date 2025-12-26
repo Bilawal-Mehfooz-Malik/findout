@@ -3,6 +3,7 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/app/components/button";
+import { cn } from "@/app/lib/utils";
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
@@ -16,10 +17,18 @@ export function ModeToggle() {
       variant="outline"
       size="icon-lg"
       onClick={handleClick}
-      className="cursor-pointer"
+      className={cn("cursor-pointer")}
     >
-      <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+      <Sun
+        className={cn(
+          "h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
+        )}
+      />
+      <Moon
+        className={cn(
+          "absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
+        )}
+      />
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

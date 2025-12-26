@@ -1,6 +1,6 @@
 import { hardcoded } from "@/app/lib/i18n";
 import { SearchIcon } from "lucide-react";
-import PrimaryButton from "./PrimaryButton";
+import { cn } from "../lib/utils";
 
 export default function SearchBar({ hintText }: { hintText: string }) {
   return (
@@ -15,18 +15,19 @@ export default function SearchBar({ hintText }: { hintText: string }) {
         <input
           type="text"
           placeholder={hardcoded("Search...")}
-          className="flex-1 bg-transparent px-2 text-base font-medium placeholder:text-zinc-400 focus:outline-none min-w-0 truncate sm:hidden"
+          className={cn(
+            "flex-1 bg-transparent px-2 text-base font-medium placeholder:text-zinc-400 focus:outline-none min-w-0 truncate sm:hidden"
+          )}
         />
 
         {/* Input for medium+ screens */}
         <input
           type="text"
           placeholder={hintText}
-          className="hidden sm:flex flex-1 bg-transparent px-2 text-base font-medium placeholder:text-zinc-400 focus:outline-none min-w-0 truncate"
+          className={cn(
+            "hidden sm:flex flex-1 bg-transparent px-2 text-base font-medium placeholder:text-zinc-400 focus:outline-none min-w-0 truncate"
+          )}
         />
-
-        {/* Button */}
-        {/* <PrimaryButton label={hardcoded("Search")} /> */}
       </div>
     </div>
   );
