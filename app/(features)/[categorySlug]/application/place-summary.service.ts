@@ -6,8 +6,6 @@ import {
 import {
   fetchFoodList,
   fetchFoodListBySubCategoryId,
-  fetchPopularFoodList,
-  fetchPopularFoodListBySubCategoryId,
 } from "../data/food-summary.repo";
 import { hardcoded } from "@/app/lib/i18n";
 import { ResidenceSummary } from "../domain/residence-summary";
