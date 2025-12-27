@@ -1,6 +1,6 @@
 import { MyCarousel } from "@/app/ui/MyCarousel";
 import { fetchCategorySlugById } from "../data/categoy.repo";
-import { PlaceSummaryCard } from "../[categorySlug]/components/PlaceSummaryCard";
+import { PlaceSummaryCard } from "../../ui/place-summary-card/PlaceSummaryCard";
 import { ResidenceSummary } from "../[categorySlug]/domain/residence-summary";
 import { FoodSummary } from "../[categorySlug]/domain/food-summary";
 import { CategoryId } from "@/app/lib/my-data-types";

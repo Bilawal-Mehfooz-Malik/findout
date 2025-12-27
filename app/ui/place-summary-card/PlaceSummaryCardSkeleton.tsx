@@ -1,4 +1,4 @@
-import { CategoryId } from "../lib/my-data-types";
+import { CategoryId } from "@/app/lib/my-data-types";
 
 interface Props {
   categoryId: CategoryId;

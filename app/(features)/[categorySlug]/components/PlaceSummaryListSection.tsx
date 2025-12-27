@@ -1,5 +1,5 @@
 import { CategoryId } from "@/app/lib/my-data-types";
-import { PlaceSummaryCard } from "./PlaceSummaryCard";
+import { PlaceSummaryCard } from "../../../ui/place-summary-card/PlaceSummaryCard";
 import { hardcoded } from "@/app/lib/i18n";
 import { fetchCategorySlugById } from "../../data/categoy.repo";
 

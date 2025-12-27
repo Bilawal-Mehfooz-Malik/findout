@@ -1,6 +1,6 @@
 import { MyCarousel } from "@/app/ui/MyCarousel";
-import { PlaceSummaryCardSkeleton } from "@/app/ui/PlaceSummaryCardSkeleton";
 import { CategoryId } from "@/app/lib/my-data-types";
+import { PlaceSummaryCardSkeleton } from "@/app/ui/place-summary-card/PlaceSummaryCardSkeleton";
 
 interface Props {
   categoryId: CategoryId;

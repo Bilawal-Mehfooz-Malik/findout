@@ -1,11 +1,13 @@
 import Image from "next/image";
-import { Pricing } from "../domain/pricing";
+import { Pricing } from "../../(features)/[categorySlug]/domain/pricing";
 import Link from "next/link";
 import { StarIcon } from "lucide-react";
 import { formatPricing } from "@/app/lib/pricing.formatter";
-import { StatusIndicator } from "@/app/ui/StatusIndicator";
+import { StatusIndicator } from "@/app/ui/place-summary-card/StatusIndicator";
 import { OperationalStatus, PlaceId } from "@/app/lib/my-data-types";
 import { cn } from "@/app/lib/utils";
+import { Suspense } from "react";
+import { StatusIndicatorSkeleton } from "@/app/ui/place-summary-card/StatusIndicatorSkeleton";
 
 interface Props {
   id: PlaceId;
@@ -61,11 +63,13 @@ export function PlaceSummaryCard({
 
           {/* Status Badge (Bottom Left) */}
           <div className="absolute bottom-3 left-3 z-10">
-            <StatusIndicator
-              placeId={id}
-              availability={availability}
-              operationalStatus={operationalStatus}
-            />
+            <Suspense fallback={<StatusIndicatorSkeleton />}>
+              <StatusIndicator
+                placeId={id}
+                availability={availability}
+                operationalStatus={operationalStatus}
+              />
+            </Suspense>
           </div>
         </div>
 

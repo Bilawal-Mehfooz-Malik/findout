@@ -3,10 +3,9 @@ import SearchBar from "../../ui/SearchBar";
 
 export default function HomeSearchBar() {
   return (
-    <div className="w-[95%] mx-auto max-w-6xl">
-      <SearchBar
-        hintText={hardcoded("Search for residences and resturants...")}
-      />
-    </div>
+    <SearchBar
+      className="w-[95%] mx-auto max-w-6xl"
+      hintText={hardcoded("Search for residences and resturants...")}
+    />
   );
 }
