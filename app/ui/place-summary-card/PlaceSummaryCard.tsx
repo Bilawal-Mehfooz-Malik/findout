@@ -8,6 +8,7 @@ import { OperationalStatus, PlaceId } from "@/app/lib/my-data-types";
 import { cn } from "@/app/lib/utils";
 import { Suspense } from "react";
 import { StatusIndicatorSkeleton } from "@/app/ui/place-summary-card/StatusIndicatorSkeleton";
+import Skeleton from "../skeleton";
 
 interface Props {
   id: PlaceId;
@@ -46,10 +47,12 @@ export function PlaceSummaryCard({
       <div className="flex flex-col gap-3">
         {/* 1. Image: Forced 4:3 Aspect Ratio */}
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-zinc-100">
+          <Skeleton className="absolute inset-0 h-full w-full rounded-2xl" />
           {coverImageUrl && (
             <Image
               src={coverImageUrl}
               alt={name}
+              placeholder="empty"
               fill
               className={cn(
                 "object-cover transition-transform duration-500 group-hover:scale-110"

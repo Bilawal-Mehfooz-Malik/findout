@@ -4,6 +4,8 @@ import { PlaceSummaryCard } from "../../ui/place-summary-card/PlaceSummaryCard";
 import { ResidenceSummary } from "../[categorySlug]/domain/residence-summary";
 import { FoodSummary } from "../[categorySlug]/domain/food-summary";
 import { CategoryId } from "@/app/lib/my-data-types";
+import { Suspense } from "react";
+import { PlacesCarouselSkeleton } from "./PlacesCarouselSkeleton";
 
 interface Props {
   title: string;
@@ -16,26 +18,28 @@ export function PlacesCarousel({ title, places, categoryId }: Props) {
     <div className="max-w-6xl mx-auto w-[95%]">
       <h2 className="text-xl font-bold">{title}</h2>
 
-      <MyCarousel>
-        {places.map((place) => {
-          const categorySlug = fetchCategorySlugById(categoryId);
-          return (
-            <PlaceSummaryCard
-              id={place.id}
-              name={place.name}
-              categorySlug={categorySlug}
-              slug={place.slug}
-              coverImageUrl={place.coverImageUrl}
-              cityName={place.city}
-              streetAddress={place.streetAddress}
-              avgRating={place.avgRating}
-              pricing={(place as ResidenceSummary).pricing}
-              availability={(place as ResidenceSummary).availability}
-              operationalStatus={place.operationalStatus}
-            />
-          );
-        })}
-      </MyCarousel>
+      <Suspense fallback={<PlacesCarouselSkeleton categoryId={categoryId} />}>
+        <MyCarousel>
+          {places.map((place) => {
+            const categorySlug = fetchCategorySlugById(categoryId);
+            return (
+              <PlaceSummaryCard
+                id={place.id}
+                name={place.name}
+                categorySlug={categorySlug}
+                slug={place.slug}
+                coverImageUrl={place.coverImageUrl}
+                cityName={place.city}
+                streetAddress={place.streetAddress}
+                avgRating={place.avgRating}
+                pricing={(place as ResidenceSummary).pricing}
+                availability={(place as ResidenceSummary).availability}
+                operationalStatus={place.operationalStatus}
+              />
+            );
+          })}
+        </MyCarousel>
+      </Suspense>
     </div>
   );
 }
