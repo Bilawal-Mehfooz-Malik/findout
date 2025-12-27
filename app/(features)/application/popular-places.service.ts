@@ -1,8 +1,8 @@
 import { CategoryId } from "@/app/lib/my-data-types";
-import { fetchPopularFoodList } from "../[categorySlug]/data/food-summary.repo";
-import { fetchPopularResidenceList } from "../[categorySlug]/data/residence-summary.repo";
 import { FoodSummary } from "../[categorySlug]/domain/food-summary";
 import { ResidenceSummary } from "../[categorySlug]/domain/residence-summary";
+import { fetchPopularResidenceList } from "../data/popular-residence.repo";
+import { fetchPopularFoodList } from "../data/popular-food.repo";
 
 export async function fetchPopularPlaces(
   categoryId: CategoryId

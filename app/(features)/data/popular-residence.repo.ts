@@ -1,21 +1,22 @@
-import { SubCategoryId } from "@/app/lib/my-data-types";
-import { hardcoded } from "@/app/lib/i18n";
-import sql from "@/app/lib/db";
 import {
   mapResidenceSummary,
   ResidenceSummary,
-} from "../domain/residence-summary";
-import { fetchPlacePricing } from "./pricing.repo";
+} from "../[categorySlug]/domain/residence-summary";
+import { fetchPlacePricing } from "../[categorySlug]/data/pricing.repo";
+import { hardcoded } from "@/app/lib/i18n";
+import sql from "@/app/lib/db";
+import { SubCategoryId } from "@/app/lib/my-data-types";
 
 interface Props {
   subCategoryId: SubCategoryId;
 }
 
-export async function fetchResidenceList(): Promise<ResidenceSummary[]> {
+export async function fetchPopularResidenceList(): Promise<ResidenceSummary[]> {
   try {
     const residences = await sql<ResidenceSummary[]>`
       SELECT * FROM residences 
       WHERE approval_status = 'approved' 
+      AND is_featured = true 
       ORDER BY updated_at DESC
     `;
 
@@ -29,15 +30,11 @@ export async function fetchResidenceList(): Promise<ResidenceSummary[]> {
     return residenceSummaries;
   } catch (error) {
     console.error("Fetch Residence List Error:", error);
-    throw new Error(
-      hardcoded(
-        "Oops! We couldn't load the residences. Please try again later."
-      )
-    );
+    return [];
   }
 }
 
-export async function fetchResidenceListBySubCategoryId({
+export async function fetchPopularResidenceListBySubCategoryId({
   subCategoryId,
 }: Props): Promise<ResidenceSummary[]> {
   try {
@@ -45,6 +42,7 @@ export async function fetchResidenceListBySubCategoryId({
       SELECT * FROM residences 
       WHERE sub_category_id = ${subCategoryId} 
       AND approval_status = 'approved' 
+      AND is_featured = true 
       ORDER BY updated_at DESC
     `;
 
