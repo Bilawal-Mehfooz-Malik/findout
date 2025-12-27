@@ -60,6 +60,19 @@ export type OpeningHours = {
  * @param slots - Array of OpeningHourSlotRow from DB
  * @returns OpeningHours object suitable for frontend consumption
  */
+
+/* Example usage:
+const openingHours: OpeningHours = {
+  MONDAY: [
+    { open: "09:00", close: "12:00" },
+    { open: "13:00", close: "17:00" },
+  ],
+  TUESDAY: true, // 24h open
+  WEDNESDAY: [
+    { open: "10:00", close: "14:00" }
+  ],
+  // THURSDAY, FRIDAY, SATURDAY, SUNDAY are omitted → closed
+};*/
 export function mapDbToAppOpeningHours(
   hours: OpeningHourRow[],
   slots: OpeningHourSlotRow[]

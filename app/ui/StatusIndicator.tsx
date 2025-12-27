@@ -23,7 +23,7 @@ export async function StatusIndicator({
     operationalStatus,
   });
 
-  if (status.label === "Status unknown") {
+  if (status === null) {
     return null;
   }
 

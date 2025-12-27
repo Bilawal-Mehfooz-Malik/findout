@@ -1,9 +1,8 @@
-import {
-  isPlaceCurrentlyOpen,
-} from "../(features)/[categorySlug]/[placeSlug]/application/opening-hours.service";
 import { OperationalStatus, PlaceId } from "@/app/lib/my-data-types";
 import { StatusIndicator } from "../(features)/[categorySlug]/domain/status-indicator";
 import { hardcoded } from "./i18n";
+import { getOpeningHoursByPlaceId } from "../(features)/[categorySlug]/data/opening-hours.repo";
+import { StatusFormatterClient } from "../ui/client-status.formatter";
 
 type Params = {
   placeId: PlaceId;
@@ -15,7 +14,7 @@ export async function getStatusIndicator({
   placeId,
   availability,
   operationalStatus,
-}: Params): Promise<StatusIndicator> {
+}: Params): Promise<StatusIndicator | null> {
   if (availability === false) {
     return {
       label: hardcoded("Unavailable"),
@@ -44,16 +43,10 @@ export async function getStatusIndicator({
       };
 
     case "default":
-      const isOpen = await isPlaceCurrentlyOpen(placeId);
-      return {
-        label: hardcoded(isOpen ? "Open" : "Closed"),
-        variant: isOpen ? "success" : "error",
-      };
+      const { hours, slots } = await getOpeningHoursByPlaceId(placeId);
+      return StatusFormatterClient({ hours, slots });
 
     default:
-      return {
-        label: hardcoded("Status unknown"),
-        variant: "muted",
-      };
+      return null;
   }
 }
